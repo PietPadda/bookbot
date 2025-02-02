@@ -21,7 +21,7 @@ def count_words(string):
         The number of words in the string (int).
     """
     words = string.split()  # make individual words
-    return len(words)
+    return len(words)  # count words
 
 
 def count_char(string):
@@ -37,7 +37,7 @@ def count_char(string):
     # make a sorted list of chars to use in dictionary
     lower_text = string.lower()  # make string lowercase
     unique_characters = set()  # init empty set
-    for char in lower_text:
+    for char in lower_text:  # loop each character in the string
         unique_characters.add(char)  # filter out uniq chars
     sorted_unique = sorted(list(unique_characters))  # create sorted list
 
@@ -45,12 +45,12 @@ def count_char(string):
     char_counts = {}  # init dict
     for uniq_char in sorted_unique:
         char_counts[uniq_char] = 0  # start empty
-        for text_char in lower_text:
-            if text_char == uniq_char:
-                char_counts[uniq_char] += 1
+        for text_char in lower_text:  # loop each char in the string
+            if text_char == uniq_char:  # if it's = to unique char list
+                char_counts[uniq_char] += 1  # update counter
 
     # print (f"DEBUG : Pre list of chars:\n\n {char_counts}\n\n")
-    return char_counts
+    return char_counts  # return dict with counted unique chars
 
 
 def alphabet_only(dict):
@@ -63,11 +63,11 @@ def alphabet_only(dict):
         A dictionary with only alphabet filtered out  (dict).
     """
     alpha_dict = {}  # init dict
-    for key in dict:
-        if key.isalpha():
-            alpha_dict[key] = dict[key]
+    for key in dict:  # each char in dictionary
+        if key.isalpha():  # if is alphabetical
+            alpha_dict[key] = dict[key]  # add to new dictionary
     # print(f"DEBUG : alphabetical:\n\n {alpha_dict}\n\n")
-    return alpha_dict
+    return alpha_dict  # dict with only alphabetical letters
 
 
 def report_dict(dict):
@@ -102,22 +102,22 @@ def text_report(dict, word_count):
     Returns:
         A series of text for the  report  (string).
     """
-    print("--- Begin report of books/frankenstein.txt ---")
-    print(f"{word_count} words found in the document\n")
+    print("--- Begin report of books/frankenstein.txt ---")  # report header
+    print(f"{word_count} words found in the document\n")  # summary of word wount
 
-    for char_dict in dict:
-        char = char_dict["name"]
-        count = char_dict["sum"]
-        print(f"The '{char}' character was found {count} times.")
+    for char_dict in dict:  # loop each dictionary inside list
+        char = char_dict["name"]  # set char = name of each char dictionary ie character
+        count = char_dict["sum"]  # set count = sum of each char dictionary ie sun
+        print(f"The '{char}' character was found {count} times.")  # print each char count
 
-    print("\n--- End report ---")
+    print("\n--- End report ---")  # report footer
 
 
 def main():
     """Main function to read a file, count words, and print the count."""
     path = "books/frankenstein.txt"  # path to text
     text = get_book(path)  # get book from path
-    word_count = count_words(text)
+    word_count = count_words(text)  # generate word count
     counting = count_char(text)  # create sorted dict of chars counted
     alpha = alphabet_only(counting)  # filter out only alphabetical keys
     rep_dict = report_dict(alpha)  # generate dict of list of dict with sorted sum
